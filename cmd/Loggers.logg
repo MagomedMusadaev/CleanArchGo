@@ -1,0 +1,94 @@
+ERROR: 2024/12/09 18:34:16 Не удалось подключиться к db - sql: unknown driver "postgres" (forgotten import?)
+INFO: 2024/12/09 18:35:22 Успешно подключено к PostgresDB
+INFO: 2024/12/09 20:14:21 Успешно подключено к PostgresDB
+INFO: 2024/12/09 20:15:28 Успешно подключено к PostgresDB
+INFO: 2024/12/09 20:15:28 Сервер запушен на порту: 8085
+INFO: 2024/12/09 20:33:12 Успешно подключено к PostgresDB
+INFO: 2024/12/09 20:33:12 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 20:36:38 Не удалось добавить пользователя в psql pq: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 20:36:38 Не удалось зарегестрировать пользователя - Не удалось создать пользователя: pq: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 20:45:19 Успешно подключено к PostgresDB
+INFO: 2024/12/09 20:45:19 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 20:45:37 Не удалось добавить пользователя в psql pq: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 20:45:40 Не удалось добавить пользователя в psql pq: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 20:54:50 Успешно подключено к PostgresDB
+INFO: 2024/12/09 20:54:50 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 20:56:12 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:03:29 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 21:16:24 Успешно подключено к PostgresDB
+INFO: 2024/12/09 21:16:24 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 21:16:57 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 21:28:58 Успешно подключено к PostgresDB
+INFO: 2024/12/09 21:28:58 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 21:29:23 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 21:30:15 Успешно подключено к PostgresDB
+INFO: 2024/12/09 21:30:15 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 21:30:25 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 21:30:53 Успешно подключено к PostgresDB
+INFO: 2024/12/09 21:30:53 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 21:31:03 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 21:34:10 Успешно подключено к PostgresDB
+INFO: 2024/12/09 21:34:10 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 21:34:22 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:34:55 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:34:56 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:34:57 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:34:58 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:34:59 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:35:00 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:35:01 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:35:01 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:35:03 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:35:04 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:35:04 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:35:20 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:35:22 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:35:23 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:35:29 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 21:35:30 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 21:46:27 Успешно подключено к PostgresDB
+INFO: 2024/12/09 21:46:27 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 21:46:38 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 22:17:02 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:17:02 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 22:17:50 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 22:18:03 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:18:04 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 22:18:14 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 22:18:18 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 22:18:22 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 22:18:34 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 22:18:54 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:18:54 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 22:19:05 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 22:19:10 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+ERROR: 2024/12/09 22:19:11 Не удалось добавить пользователя в psql: duplicate key value violates unique constraint "users_email_key"
+INFO: 2024/12/09 22:31:33 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:31:33 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 22:33:28 Невалидный параметр - strconv.Atoi: parsing "": invalid syntax
+ERROR: 2024/12/09 22:34:14 Невалидный параметр - strconv.Atoi: parsing "": invalid syntax
+ERROR: 2024/12/09 22:35:27 Невалидный параметр - strconv.Atoi: parsing "": invalid syntax
+ERROR: 2024/12/09 22:35:36 Невалидный параметр - strconv.Atoi: parsing "": invalid syntax
+INFO: 2024/12/09 22:36:57 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:36:57 Сервер запушен на порту: 8085
+INFO: 2024/12/09 22:38:35 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:38:35 Сервер запушен на порту: 8085
+INFO: 2024/12/09 22:39:12 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:39:12 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 22:39:24 Невалидный параметр - strconv.Atoi: parsing "": invalid syntax
+ERROR: 2024/12/09 22:39:46 Невалидный параметр - strconv.Atoi: parsing "": invalid syntax
+INFO: 2024/12/09 22:41:01 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:41:01 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 22:41:12 Невалидный параметр - strconv.Atoi: parsing "": invalid syntax
+ERROR: 2024/12/09 22:42:16 Невалидный параметр - strconv.Atoi: parsing "": invalid syntax
+INFO: 2024/12/09 22:43:25 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:43:25 Сервер запушен на порту: 8085
+ERROR: 2024/12/09 22:43:39 Невалидный параметр - strconv.Atoi: parsing "": invalid syntax
+INFO: 2024/12/09 22:44:15 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:44:15 Сервер запушен на порту: 8085
+INFO: 2024/12/09 22:49:38 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:49:38 Сервер запушен на порту: 8085
+INFO: 2024/12/09 22:51:26 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:51:26 Сервер запушен на порту: 8085
+INFO: 2024/12/09 22:52:44 Успешно подключено к PostgresDB
+INFO: 2024/12/09 22:52:44 Сервер запушен на порту: 8085
