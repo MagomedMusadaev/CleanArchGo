@@ -9,6 +9,7 @@ import (
 type UserServiceInterface interface {
 	AddUser(user *entities.User) error
 	RecUser(id int) (*entities.User, error)
+	RemoveUser(id int) error
 }
 
 type UserService struct {
@@ -29,4 +30,8 @@ func (u *UserService) AddUser(user *entities.User) error {
 
 func (u *UserService) RecUser(id int) (*entities.User, error) {
 	return u.repo.GetUser(id)
+}
+
+func (u *UserService) RemoveUser(id int) error {
+	return u.repo.DeleteUser(id)
 }

@@ -14,6 +14,7 @@ import (
 type UserHandlerInterface interface {
 	CreateUser(w http.ResponseWriter, r *http.Request)
 	GetUser(w http.ResponseWriter, r *http.Request)
+	DeleteUser(w http.ResponseWriter, r *http.Request)
 }
 
 type UserHandler struct {
@@ -67,4 +68,27 @@ func (s *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(user)
+}
+
+func (s *UserHandler) DeleteUser(w http.ResponseWriter, r *http.Request) {
+
+	idStr := r.URL.Query().Get("id")
+	if idStr == "" {
+		utils.DecodeErr(w, errors.New("ID пользователя не указан"), http.StatusBadRequest)
+		return
+	}
+
+	userID, err := strconv.Atoi(idStr)
+	if err != nil {
+		utils.DecodeErr(w, errors.New("uncorrected param"), http.StatusBadRequest)
+		logg.Error("Невалидный параметр - " + err.Error())
+		return
+	}
+
+	if err := s.service.RemoveUser(userID); err != nil {
+		utils.DecodeErr(w, err, http.StatusBadRequest)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
 }

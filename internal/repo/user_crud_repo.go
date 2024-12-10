@@ -5,13 +5,13 @@ import (
 	"CleanArchitectureGo/pkg/logg"
 	"database/sql"
 	"errors"
-	"fmt"
 	"github.com/lib/pq"
 )
 
 type UserRepoInterface interface {
 	CreateUser(user *entities.User) error
 	GetUser(id int) (*entities.User, error)
+	DeleteUser(id int) error
 }
 
 type UserRepository struct {
@@ -69,9 +69,24 @@ func (u *UserRepository) GetUser(id int) (*entities.User, error) {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, errors.New("пользователя с таким id не найдено")
 		}
-		fmt.Println(err)
+
 		return nil, errors.New("ошибка получения пользователя")
 	}
 
 	return &user, nil
+}
+
+func (u *UserRepository) DeleteUser(id int) error {
+	query := `UPDATE users SET is_deleted = true WHERE id = $1`
+
+	_, err := u.db.Exec(query, id)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return errors.New("пользователя с таким id не найдено")
+		}
+
+		return errors.New("ошибка удаления пользователя")
+	}
+
+	return nil
 }
