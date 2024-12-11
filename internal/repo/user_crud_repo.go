@@ -5,13 +5,18 @@ import (
 	"CleanArchitectureGo/pkg/logg"
 	"database/sql"
 	"errors"
+	"fmt"
 	"github.com/lib/pq"
+	"reflect"
+	"strings"
+	"time"
 )
 
 type UserRepoInterface interface {
 	CreateUser(user *entities.User) error
 	GetUser(id int) (*entities.User, error)
 	DeleteUser(id int) error
+	UpdateUser(user *entities.User) (*entities.User, error)
 }
 
 type UserRepository struct {
@@ -89,4 +94,78 @@ func (u *UserRepository) DeleteUser(id int) error {
 	}
 
 	return nil
+}
+
+func (u *UserRepository) UpdateUser(user *entities.User) (*entities.User, error) {
+	var query strings.Builder
+	var values []interface{}
+
+	query.WriteString(`UPDATE users SET `)
+
+	v := reflect.ValueOf(*user)
+	t := v.Type()
+
+	// Формирование запроса
+	for i := 0; i < v.NumField(); i++ {
+		field := v.Field(i)
+		tag := t.Field(i).Tag.Get("db")
+
+		if tag == "" || tag == "id" {
+			continue // если понадобиться менять id пользователя, то мы просто уберём это условие
+		}
+
+		isEmpty := false
+		switch field.Kind() {
+		case reflect.String:
+			isEmpty = field.String() == ""
+		case reflect.Bool:
+			if !field.IsZero() {
+				query.WriteString(fmt.Sprintf("%s = $%d, ", tag, len(values)+1))
+				values = append(values, field.Bool())
+			}
+		case reflect.Struct:
+			if field.Type() == reflect.TypeOf(time.Time{}) {
+				timeValue := field.Interface().(time.Time)
+				// Проверка на пустое значение времени
+				if !timeValue.IsZero() {
+					values = append(values, timeValue) // Явно передаем time.Time
+					query.WriteString(fmt.Sprintf("%s = $%d, ", tag, len(values)))
+				}
+				continue
+			}
+		}
+
+		// Если поле не пустое, добавляем его в запрос
+		if !isEmpty {
+			query.WriteString(fmt.Sprintf("%s = $%d, ", tag, len(values)+1))
+			values = append(values, field.Interface())
+		}
+	}
+
+	// Проверка на наличие полей для обновления
+	if len(values) == 0 {
+		return nil, errors.New("no fields to update")
+	}
+
+	// Формирование финального запроса
+	finalQuery := strings.TrimSuffix(query.String(), ", ")
+	finalQuery += fmt.Sprintf(" WHERE id = $%d RETURNING *", len(values)+1)
+	values = append(values, user.ID)
+
+	// Выполнение запроса
+	row := u.db.QueryRow(finalQuery, values...)
+	if err := row.Scan(
+		&user.ID,
+		&user.Name,
+		&user.Email,
+		&user.Password,
+		&user.FromDateCreate,
+		&user.FromDateUpdate,
+		&user.IsDeleted,
+		&user.IsBanned,
+	); err != nil {
+		return nil, errors.New("не удалось изменить данные: " + err.Error())
+	}
+
+	return user, nil
 }

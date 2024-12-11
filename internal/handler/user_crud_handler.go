@@ -11,10 +11,15 @@ import (
 	"strconv"
 )
 
+var errDecode = errors.New("ошибка сохранения данных")
+var errNotID = errors.New("ID пользователя не указан")
+var errUncorrectedParam = errors.New("некоректные данные")
+
 type UserHandlerInterface interface {
 	CreateUser(w http.ResponseWriter, r *http.Request)
 	GetUser(w http.ResponseWriter, r *http.Request)
 	DeleteUser(w http.ResponseWriter, r *http.Request)
+	UpdateUser(w http.ResponseWriter, r *http.Request)
 }
 
 type UserHandler struct {
@@ -29,7 +34,7 @@ func (s *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	var user entities.User
 
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
-		utils.DecodeErr(w, err, http.StatusBadRequest)
+		utils.DecodeErr(w, errDecode, http.StatusBadRequest)
 		logg.Error("Не удалось декодить полученные данные - " + err.Error())
 		return
 	}
@@ -48,13 +53,13 @@ func (s *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	idStr := r.URL.Query().Get("id")
 	if idStr == "" {
-		utils.DecodeErr(w, errors.New("ID пользователя не указан"), http.StatusBadRequest)
+		utils.DecodeErr(w, errNotID, http.StatusBadRequest)
 		return
 	}
 
 	userID, err := strconv.Atoi(idStr)
 	if err != nil {
-		utils.DecodeErr(w, errors.New("uncorrected param"), http.StatusBadRequest)
+		utils.DecodeErr(w, errUncorrectedParam, http.StatusBadRequest)
 		logg.Error("Невалидный параметр - " + err.Error())
 		return
 	}
@@ -74,21 +79,53 @@ func (s *UserHandler) DeleteUser(w http.ResponseWriter, r *http.Request) {
 
 	idStr := r.URL.Query().Get("id")
 	if idStr == "" {
-		utils.DecodeErr(w, errors.New("ID пользователя не указан"), http.StatusBadRequest)
+		utils.DecodeErr(w, errNotID, http.StatusBadRequest)
 		return
 	}
 
 	userID, err := strconv.Atoi(idStr)
 	if err != nil {
-		utils.DecodeErr(w, errors.New("uncorrected param"), http.StatusBadRequest)
+		utils.DecodeErr(w, errUncorrectedParam, http.StatusBadRequest)
 		logg.Error("Невалидный параметр - " + err.Error())
 		return
 	}
 
-	if err := s.service.RemoveUser(userID); err != nil {
+	if err = s.service.RemoveUser(userID); err != nil {
 		utils.DecodeErr(w, err, http.StatusBadRequest)
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
+}
+
+func (s *UserHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
+
+	idStr := r.URL.Query().Get("id")
+	if idStr == "" {
+		utils.DecodeErr(w, errNotID, http.StatusBadRequest)
+		return
+	}
+
+	userID, err := strconv.Atoi(idStr)
+	if err != nil {
+		utils.DecodeErr(w, errUncorrectedParam, http.StatusBadRequest) // под вопросом где он должен быть (в сервисе или тут)
+		logg.Error("Невалидный параметр - " + err.Error())
+	}
+
+	var user entities.User
+	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
+		logg.Error("Не удалось декодить полученные данные - " + err.Error())
+		utils.DecodeErr(w, errDecode, http.StatusBadRequest)
+		return
+	}
+
+	resUser, err := s.service.RedactUser(&user, userID)
+	if err != nil {
+		utils.DecodeErr(w, err, http.StatusBadRequest)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(resUser)
 }
