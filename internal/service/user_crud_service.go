@@ -10,6 +10,7 @@ type UserServiceInterface interface {
 	AddUser(user *entities.User) error
 	RecUser(id int) (*entities.User, error)
 	RemoveUser(id int) error
+	RedactUser(user *entities.User, userID int) (*entities.User, error)
 }
 
 type UserService struct {
@@ -34,4 +35,12 @@ func (u *UserService) RecUser(id int) (*entities.User, error) {
 
 func (u *UserService) RemoveUser(id int) error {
 	return u.repo.DeleteUser(id)
+}
+
+func (u *UserService) RedactUser(user *entities.User, userID int) (*entities.User, error) {
+
+	user.ID = userID
+	user.FromDateUpdate = time.Now()
+
+	return u.repo.UpdateUser(user)
 }
